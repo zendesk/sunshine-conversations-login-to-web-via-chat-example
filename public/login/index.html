@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" placeholder="username" id="username">
+  <input type="text" placeholder="password" id="password">
+  <button id="submit">login</button>
+  <script>
+  (function(d, s, id) {
+      var js,
+          fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+          return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://cdn.smooch.io/webview-sdk.min.js';
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'WebviewSdkScript'));
+
+    var BASE_URL = window.origin;
+
+    document.querySelector('#submit').onclick = function() {
+      var username = document.querySelector('#username').value;
+      var password = document.querySelector('#password').value;
+
+      // login
+      fetch(BASE_URL + '/login', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          // send a message to the page that the web messenger is embedded in
+          window.parent.parent.postMessage({
+            authcode: data.authcode
+          }, BASE_URL);
+
+          window.WebviewSdk.close();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    };
+  </script>
+</body>
+</html>
