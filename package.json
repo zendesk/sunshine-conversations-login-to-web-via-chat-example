@@ -13,6 +13,6 @@
     "cookie-parser": "1.4.4",
     "express": "4.16.4",
     "jsonwebtoken": "8.5.1",
-    "smooch-core": "8.4.0"
+    "smooch-core": "8.11.4"
   }
 }
