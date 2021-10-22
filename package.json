@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "1.18.3",
-    "cookie-parser": "1.4.4",
+    "cookie-parser": "1.4.5",
     "express": "4.16.4",
     "jsonwebtoken": "8.5.1",
     "smooch-core": "8.4.0"
